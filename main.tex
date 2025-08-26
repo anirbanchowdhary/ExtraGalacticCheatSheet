@@ -1,0 +1,377 @@
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[margin=1.6cm]{geometry}
+\usepackage{amsmath,amssymb,bm}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{multicol}
+\usepackage{siunitx}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=black, urlcolor=blue}
+\setlist{nosep}
+\setlength{\parskip}{0.35em}
+\setlength{\parindent}{0pt}
+
+% --- Quick-parameter slots you can change on the fly ---
+\newcommand{\Hnot}{H_0}
+\newcommand{\hubble}{h}
+\newcommand{\Omm}{\Omega_{\mathrm m}}
+\newcommand{\Omb}{\Omega_{\mathrm b}}
+\newcommand{\Omr}{\Omega_{\mathrm r}}
+\newcommand{\Oml}{\Omega_{\Lambda}}
+\newcommand{\ns}{n_s}
+\newcommand{\sigEight}{\sigma_8}
+
+\begin{document}
+
+\begin{center}
+{\Large \textbf{Cosmology \& Extragalactic Cheat Sheet}}\\
+\small (flat $\Lambda$CDM unless noted; comoving densities unless stated)
+\end{center}
+
+% =========================================================
+\section*{0) Conventions, constants, quick conversions}
+\begin{itemize}
+\item Scale factor $a=1/(1+z)$; \; $H(z)=\Hnot E(z)$, \;
+$E(z)=\sqrt{\Omm(1+z)^3+\Omr(1+z)^4+\Oml}$.
+\item $\Hnot=100\,\hubble\ \mathrm{km\,s^{-1}\,Mpc^{-1}}$, \quad $1/\Hnot\simeq 9.78\,\hubble^{-1}\ \mathrm{Gyr}$.
+\item $c=2.9979\times10^5\,\mathrm{km\,s^{-1}}$, \;
+$G=4.3009\times10^{-6}\ \mathrm{kpc}\,(\mathrm{km\,s^{-1}})^2\,M_\odot^{-1}$.
+\item Critical density today:
+\[
+\rho_{\mathrm c,0}=\frac{3\Hnot^2}{8\pi G}
+=2.775\times10^{11}\,\hubble^2\ M_\odot\,\mathrm{Mpc}^{-3}.
+\]
+Mean matter density: $\bar\rho_{m,0}=\Omm\rho_{\mathrm c,0}$.
+\item Top-hat mass--radius: $M=\frac{4\pi}{3}\bar\rho_{m,0}R^3$ (comoving $R$).
+\item Distances (flat): $\chi(z)=c\int_0^z\!dz'/H(z')$,\; $D_A=\chi/(1+z)$,\; $D_L=(1+z)\chi$.
+\item Comoving volume element: $\displaystyle \frac{dV}{dz\,d\Omega}=\frac{c\,\chi^2}{H(z)}$.
+\item AB magnitudes: $m_{\rm AB}=-2.5\log_{10}(f_\nu/3631\,\mathrm{Jy})$;\; distance modulus $\mu=5\log_{10}(D_L/10\,\mathrm{pc})$.
+\item Surface-brightness dimming: $\propto (1+z)^{-4}$.
+\item CMB temperature: $T_{\rm CMB,0}=2.7255\ {\rm K}$,\; $T_{\rm CMB}(z)=T_0(1+z)$.
+\end{itemize}
+
+% =========================================================
+\section*{1) Toy universes: scaling relations (compare at a glance)}
+For a single-component flat FRW with $p=w\rho$:
+\[
+a(t)\propto t^{\frac{2}{3(1+w)}},\quad H(t)=\dot a/a \propto t^{-1},\quad
+\rho\propto a^{-3(1+w)}.
+\]
+\begin{center}
+\begin{tabular}{lcccc}
+\toprule
+\textbf{Universe} & $a(t)$ & $H(t)$ & $\rho(a)$ & Linear growth $D(a)$ \\
+\midrule
+Radiation ($w=1/3$) & $t^{1/2}$ & $t^{-1}$ & $a^{-4}$ &
+$\propto a^2$ (super-horizon), $\propto \ln a$ (sub-horizon CDM) \\
+Matter / EdS ($w=0$) & $t^{2/3}$ & $t^{-1}$ & $a^{-3}$ & $\propto a$ \\
+Curvature ($\Omega_k\!\to\!1$) & $t$ & $t^{-1}$ & $\to 0$ & $\to$ const (growth stalls) \\
+de Sitter ($w=-1$) & $e^{Ht}$ & const & const & $\to$ const (peculiar growth dies) \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+% =========================================================
+\section*{2) Characteristic time \& length scales}
+\begin{itemize}
+\item Hubble time/length: $t_H(z)=1/H(z)$,\; $R_H(z)=c/H(z)$.
+\item Conformal time (comoving horizon): $\eta=\int_0^t\!dt'/a(t')=\int_\infty^z\!dz'/H(z')$.
+\item Sound horizon (pre-recombination):
+\[
+r_s(a)=\int_0^{a}\frac{c_s(a')}{a'^2 H(a')}da',\quad
+c_s=\frac{c}{\sqrt{3(1+R)}},\quad R\equiv \frac{3\rho_b}{4\rho_\gamma}\propto a.
+\]
+Numerically $r_s(z_\ast)\simeq 147\ \mathrm{Mpc}$ (comoving; mildly cosmology dependent).
+\item BAO standard ruler (comoving): $\sim 150\ \mathrm{Mpc}$.
+\item Photon diffusion (Silk) damping scale: $r_D\sim \mathcal{O}(10)\ \mathrm{Mpc}$ (comoving) at recombination (order-of-mag).
+\item Jeans scales: $\lambda_J=c_s\sqrt{\pi/(G\rho)}$,\;
+$M_J\simeq \frac{\pi^{5/2}}{6}\frac{c_s^3}{G^{3/2}\rho^{1/2}}$.
+\item Dynamical/free-fall: $t_{\rm dyn}\sim (G\bar\rho)^{-1/2}\approx 0.1\,H^{-1}$,\;
+$t_{\rm ff}=\sqrt{3\pi/(32G\rho)}$.
+\item Turnaround/virial: in EdS, $t_{\rm ta}=\tfrac{1}{2}t_{\rm coll}$,\; $R_{\rm ta}\simeq 2R_{\rm vir}$.
+\item Filtering mass after reionization: $M_{\rm filt}\sim 10^{8}\!-\!10^{9}\,M_\odot$ (UVB- \& $z$-dependent).
+\item Galaxy sizes (order-of-mag): $R_e\sim \lambda\,R_{\rm vir}$ with spin $\lambda\sim 0.035$.
+\end{itemize}
+
+% =========================================================
+\section*{3) Linear perturbations \& growth}
+\begin{itemize}
+\item Linear growth (pressureless, sub-horizon):
+\[
+\ddot\delta+2H\dot\delta-\tfrac{3}{2}\Omm(a)H^2\delta=0,\quad
+D(a)=\frac{5\Omm H(a)}{2}\int_0^{a}\frac{da'}{(a'H(a'))^3},
+\]
+normalized $D(a{=}1)=1$.
+\item Growth rate: $f\equiv d\ln D/d\ln a\simeq \Omm(z)^\gamma$, $\gamma\simeq 0.55$ (GR+$\Lambda$).
+\item Power spectrum: $P(k,z)=A\,k^{\ns}T^2(k)D^2(z)$,\quad
+$\Delta^2(k)=k^3P(k)/(2\pi^2)$.
+\item Variance: $\sigma^2(M)=\int_0^\infty \frac{dk}{k}\,\Delta^2(k)\,|W(kR)|^2$, 
+$W(x)=3(\sin x-x\cos x)/x^3$ (real-space top-hat).
+\end{itemize}
+
+% =========================================================
+\section*{4) Spherical collapse essentials}
+\begin{itemize}
+\item Parametric top-hat (EdS):
+\[
+r(\theta)=A(1-\cos\theta),\qquad t(\theta)=B(\theta-\sin\theta);\quad
+\theta=\pi\ \text{(turnaround)},\ \ 2\pi\ \text{(collapse)}.
+\]
+\item Linear threshold: $\delta_c\simeq 1.686$ (weakly $z,\Omega$ dependent in $\Lambda$CDM).
+\item Virial overdensity (wrt critical):
+\[
+\Delta_{\rm vir}(z)\simeq 18\pi^2+82x-39x^2,\quad x=\Omm(z)-1
+\quad\text{(Bryan \& Norman 1998).}
+\]
+EdS: $\Delta_{\rm vir}=18\pi^2\approx 178$ (often approximated as 200).
+\item Virial scalings (flat; $E(z)=H(z)/\Hnot$):
+\[
+R_{\rm vir}\simeq 206\ \mathrm{kpc}\ 
+\Big(\frac{M}{10^{12}\,\hubble^{-1}M_\odot}\Big)^{1/3}
+\Big(\frac{\Delta_{\rm vir}}{200}\Big)^{-1/3}E(z)^{-1},
+\]
+\[
+V_c\simeq 142\ \mathrm{km\,s^{-1}}\ 
+\Big(\frac{M}{10^{12}\,\hubble^{-1}M_\odot}\Big)^{1/3}
+\Big(\frac{\Delta_{\rm vir}}{200}\Big)^{1/6}E(z)^{1/3},
+\]
+\[
+T_{\rm vir}\simeq 1.98\times10^4\ \mathrm{K}\ 
+\Big(\frac{\mu}{0.6}\Big)
+\Big(\frac{M}{10^{8}\,\hubble^{-1}M_\odot}\Big)^{2/3}
+\Big(\frac{\Delta_{\rm vir}}{200}\Big)^{1/3}
+\Big(\frac{1+z}{10}\Big).
+\]
+\end{itemize}
+
+% =========================================================
+\section*{5) Press--Schechter (PS): board-ready derivation}
+\begin{enumerate}[leftmargin=*]
+\item \textbf{Map mass to scale:} $M=(4\pi/3)\bar\rho_{m,0}R^3$; smooth linear field $\delta_R$.
+\item \textbf{Gaussian initial field:} $\delta_R\sim \mathcal{N}(0,\sigma^2(M))$.
+\item \textbf{Collapse criterion:} region collapses by $z$ if $\delta_R$ (extrapolated to $z=0$) $\ge \delta_c/D(z)$. Peak height:
+\[
+\nu(M,z)\equiv\frac{\delta_c}{\sigma(M)D(z)}=\frac{\delta_c(z)}{\sigma(M)}.
+\]
+\item \textbf{Mass fraction in objects $>M$:} for Gaussian PDF,
+\[
+F(>M)=2\int_{\delta_c(z)}^\infty \frac{d\delta}{\sqrt{2\pi}\sigma}\,e^{-\delta^2/2\sigma^2}
+= \mathrm{erfc}\!\left(\frac{\nu}{\sqrt{2}}\right),
+\]
+the factor $2$ fixes cloud-in-cloud (exact in excursion set with sharp-$k$ filter).
+\item \textbf{Differential mass function:}
+\[
+\frac{dn}{dM}=\frac{\bar\rho_{m,0}}{M}\ f_{\rm PS}(\nu)\,\frac{d\nu}{dM},\quad
+f_{\rm PS}(\nu)=\sqrt{\frac{2}{\pi}}\ \nu\,e^{-\nu^2/2}.
+\]
+Equivalently,
+\[
+\frac{dn}{d\ln M}=\frac{\bar\rho_{m,0}}{M}\ f(\sigma)\ \frac{d\ln \sigma^{-1}}{d\ln M},\ \
+f_{\rm PS}(\sigma)=\sqrt{\frac{2}{\pi}}\frac{\delta_c}{\sigma}\exp\!\left[-\frac{\delta_c^2}{2\sigma^2}\right].
+\]
+\item \textbf{Refinements:} Sheth--Tormen (ellipsoidal barrier)
+\[
+f_{\rm ST}(\nu)=A\sqrt{\tfrac{2a}{\pi}}\ \nu\ \big[1+(\nu^2/a)^p\big]\,e^{-a\nu^2/2},
+\quad a\simeq 0.707,\ p\simeq 0.3,\ A\simeq 0.322.
+\]
+Peak-background split bias:
+\[
+b(\nu)=1+\frac{a\nu^2-1}{\delta_c}+\frac{2p}{\delta_c\,[1+(a\nu^2)^p]}.
+\]
+\textit{Caveats:} real-space top-hat $\Rightarrow$ correlated steps (non-Markov); $\delta_c$ \& $\Delta_{\rm vir}$ weakly depend on $z,\Omega$.
+\end{enumerate}
+
+% =========================================================
+\section*{6) Halo structure \& dynamics}
+\begin{itemize}
+\item NFW: $\rho(r)=\rho_s/[(r/r_s)(1+r/r_s)^2]$; concentration $c\equiv R_{\rm vir}/r_s$.
+\item Trend (order-of-mag): $c(M,z)\sim 10\,(M/10^{12}M_\odot)^{-0.1}(1+z)^{-1}$.
+\item Spin parameter: $\lambda=J|E|^{1/2}/(GM^{5/2})\sim 0.035$ (log-normal scatter).
+\item Dynamical friction (Chandrasekhar; circular orbit): $t_{\rm DF}\sim \frac{1.17}{\ln\Lambda}\frac{r_c^2V_c}{Gm_s}$.
+\end{itemize}
+
+% =========================================================
+\section*{7) Baryons: cooling, star formation, feedback}
+\begin{itemize}
+\item Cooling time: $t_{\rm cool}=\frac{3}{2}\frac{n kT}{n_e n_i\,\Lambda(T,Z)}$
+(atomic lines peak $\sim 10^{5\text{--}5.5}$ K; bremsstrahlung $\gtrsim 10^7$ K).
+\item Jeans scales: $\lambda_J=c_s\sqrt{\pi/(G\rho)}$;\; $M_J$ as in \S2.
+\item Toomre (thin disks): $Q=\kappa\sigma/(\pi G\Sigma)$; unstable if $Q\lesssim 1$.
+\item Kennicutt--Schmidt (disk-avg):
+$\Sigma_{\rm SFR}\approx 2.5\times10^{-4}
+(\Sigma_{\rm gas}/1\,M_\odot\,\mathrm{pc}^{-2})^{1.4}
+\ M_\odot\,\mathrm{yr^{-1}\,kpc^{-2}}$.
+Cloud-scale: $\dot\rho_\star\simeq \epsilon_{\rm ff}\rho/t_{\rm ff}$, $\epsilon_{\rm ff}\sim 0.01$.
+\item Photoheating suppression: halos with $V_c\lesssim 20$--$30\ \mathrm{km\,s^{-1}}$ struggle post-reionization.
+\item Feedback energetics: SNe $\sim 10^{49}\ \mathrm{erg}$ per $M_\odot$ formed; 
+AGN power $\simeq \epsilon_r \dot M c^2$, $\epsilon_r\sim 0.1$.
+\item Eddington \& Salpeter:
+\[
+L_{\rm Edd}=1.26\times 10^{38}\left(\frac{M_\bullet}{M_\odot}\right)\mathrm{erg\,s^{-1}},\qquad
+t_{\rm Sal}\approx 45\,\mathrm{Myr}\,\frac{\epsilon_r}{0.1}\left(\frac{1-\epsilon_r}{\epsilon_r}\right)^{-1}.
+\]
+\end{itemize}
+
+% =========================================================
+\section*{8) Galaxy scaling relations}
+\begin{itemize}
+\item Tully--Fisher (late types): $L\propto V_c^{3\text{--}4}$; roughly $M_\star\propto V_c^4$.
+\item Faber--Jackson (ellipticals): $L\propto \sigma^{4}$.
+\item Fundamental Plane: $R_e\propto \sigma^a I_e^{-b}$ ($a\sim 1.2$, $b\sim 0.8$; band-dependent).
+\item BH--$\sigma$: $M_\bullet\sim 10^8 M_\odot (\sigma/200\,\mathrm{km\,s^{-1}})^{4\text{--}5}$.
+\item Stellar--halo mass: peak efficiency at $M_{200}\sim 10^{12}M_\odot$ with $M_\star/M_{200}\sim 0.02$--$0.03$ (IMF-dependent).
+\item Star-forming main sequence: $\mathrm{SFR}\propto M_\star^\beta$ with $\beta\sim 0.7$--$1$; normalization rises to $z\sim 2$.
+\item Mass--metallicity: $Z$ increases with $M_\star$ and decreases with $z$.
+\end{itemize}
+
+% =========================================================
+\section*{9) Luminosity \& mass functions}
+\begin{itemize}
+\item Schechter (in $L$): 
+$\phi(L)\,dL=\phi_\star (L/L_\star)^\alpha \exp(-L/L_\star)\,d(L/L_\star)$.
+In magnitudes:
+\[
+\phi(M)=0.4\ln10\,\phi_\star\,10^{0.4(\alpha+1)(M_\star-M)}\,
+\exp\!\big[-10^{0.4(M_\star-M)}\big].
+\]
+\item Halo mass function: PS/ST (see \S5) or calibrated fits (e.g.\ Tinker et al.).
+\end{itemize}
+% =========================================================
+\section*{10. Quick Reference: Scaling Laws \& Transitions}
+
+\begin{center}
+\begin{tabular}{lccccc}
+\toprule
+Universe & $a(t)$ & $H(a)$ & $\rho(a)$ & $D(a)$ & Validity / Transition \\
+\midrule
+Radiation ($w=1/3$) 
+  & $t^{1/2}$ 
+  & $a^{-2}$ 
+  & $a^{-4}$ 
+  & $\propto a^2$ (super-horizon) 
+  & $z \gtrsim z_{\rm eq} \sim 3400$ \\
+Matter (EdS, $w=0$) 
+  & $t^{2/3}$ 
+  & $a^{-3/2}$ 
+  & $a^{-3}$ 
+  & $\propto a$ 
+  & $z_{\Lambda} \lesssim z \lesssim z_{\rm eq}$ \\
+Curvature ($\Omega_k=1$) 
+  & $t$ 
+  & $a^{-1}$ 
+  & $\to 0$ 
+  & $\propto a^0$ 
+  & If $\Omega_k$ dominates (rare in $\Lambda$CDM) \\
+De Sitter ($w=-1$) 
+  & $e^{Ht}$ 
+  & const. 
+  & const. 
+  & $\to$ const. 
+  & $z \lesssim z_{\Lambda} \sim 0.3$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\vspace{0.5em}
+Key transition redshifts in flat $\Lambda$CDM:
+\begin{itemize}
+  \item Matter--radiation equality: 
+  \[
+  1+z_{\rm eq} = \frac{\Omega_m}{\Omega_r} \simeq 3400.
+  \]
+  \item Matter--$\Lambda$ equality:
+  \[
+  1+z_\Lambda = \left(\frac{\Omega_\Lambda}{\Omega_m}\right)^{1/3} \simeq 0.3.
+  \]
+  \item Curvature--matter equality (if $\Omega_k>0$): 
+  \[
+  1+z_k = \frac{\Omega_m}{\Omega_k}.
+  \]
+\end{itemize}
+
+% =========================================================
+\section*{10) IGM, reionization, and 21-cm}
+\begin{itemize}
+\item Gunn--Peterson optical depth (order-of-mag):
+\[
+\tau_{\rm GP}\sim 1.8\times10^5\,x_{\rm HI}\left(\frac{1+z}{7}\right)^{3/2},
+\]
+so tiny $x_{\rm HI}$ saturates Ly$\alpha$ at high $z$.
+\item Global 21-cm differential brightness:
+\[
+\delta T_b\!\approx\! 27\,\mathrm{mK}\,x_{\rm HI}(1+\delta)
+\left(\frac{\Omb h^2}{0.023}\right)
+\left(\frac{0.15}{\Omm h^2}\frac{1+z}{10}\right)^{1/2}
+\left(1-\frac{T_{\rm CMB}}{T_S}\right)
+\left[\frac{H(z)}{H(z)+\partial v_r/\partial r}\right].
+\]
+\end{itemize}
+
+% =========================================================
+\section*{11) Gravitational lensing (thin lens)}
+\begin{itemize}
+\item Critical surface density:
+$\Sigma_{\rm crit}=\frac{c^2}{4\pi G}\frac{D_s}{D_d D_{ds}}$.
+\item Einstein radius:
+$\theta_E=\sqrt{\frac{4GM}{c^2}\frac{D_{ds}}{D_d D_s}}$ (point mass);\;
+SIS: $\theta_E=4\pi(\sigma_v/c)^2 D_{ds}/D_s$.
+\item Convergence $\kappa=\Sigma/\Sigma_{\rm crit}$;\; tangential shear $\gamma_t\simeq \Delta\Sigma/\Sigma_{\rm crit}$.
+\end{itemize}
+
+% =========================================================
+\section*{12) Observational quickies}
+\begin{itemize}
+\item K-correction (same filter; $f_\nu\propto \nu^\alpha$):
+$K(z)\approx -2.5(1+\alpha)\log_{10}(1+z)$.
+\item SFR indicators (Chabrier IMF; no dust; rough):
+UV 1500\,\AA: $\mathrm{SFR}[M_\odot\,\mathrm{yr^{-1}}]\approx 1.15\times10^{-28} L_\nu[\mathrm{erg\,s^{-1}\,Hz^{-1}}]$; \;
+H$\alpha$: $\mathrm{SFR}\approx 5.5\times10^{-42} L_{\mathrm{H}\alpha}[\mathrm{erg\,s^{-1}}]$.
+\item IMF conversions: Salpeter $\to$ Chabrier: multiply masses/SFR by $\sim 0.6$.
+\end{itemize}
+
+% =========================================================
+\section*{13) Cosmic timeline \& parameter snapshot}
+\begin{itemize}
+\item Key epochs: $z_{\rm eq}\sim 3400$ (matter–radiation), recombination $z\sim 1100$, 
+reionization midpoint $z\sim 6$--8, matter–$\Lambda$ equality $z\sim 0.3$.
+\item Age–redshift (flat $\Lambda$CDM):
+\[
+t(z)=\frac{2}{3\Hnot\sqrt{\Oml}}\,
+\sinh^{-1}\!\left[\sqrt{\frac{\Oml}{\Omm}}(1+z)^{-3/2}\right].
+\]
+\item Typical $\Lambda$CDM (adjust to taste): 
+$\hubble\sim 0.67,\ \Omm\sim 0.315,\ \Omb\sim 0.049,\ \Oml\sim 0.685,\ \ns\sim 0.965,\ \sigEight\sim 0.8$.
+\end{itemize}
+
+% =========================================================
+\section*{14) From $P(k)$ to $n(M,z)$: mini recipe}
+\begin{enumerate}[leftmargin=*]
+\item Choose cosmology $\to$ compute $P(k,0)=A\,k^{\ns}T^2(k)$ (e.g.\ Eisenstein--Hu transfer).
+\item Compute $\sigma(M)$ via top-hat $W(kR)$.
+\item Evolve to $z$: $\sigma(M,z)=\sigma(M)\,D(z)$.
+\item Peak height: $\nu(M,z)=\delta_c/\sigma(M,z)$.
+\item Choose $f(\nu)$ (PS, ST, or calibrated) $\to$ $dn/dM$ via \S5.
+\item Add halo properties via \S4 ($\Delta_{\rm vir}$, $R_{\rm vir}$, $V_c$, $T_{\rm vir}$).
+\item For clustering: $b(\nu)$ (e.g.\ ST bias).
+\end{enumerate}
+
+% =========================================================
+\section*{15) Blackboard summary (one-block formulas)}
+\[
+\begin{aligned}
+&H(z)=\Hnot\sqrt{\Omm(1+z)^3+\Oml},\ \
+\bar\rho_{m,0}=\Omm\frac{3\Hnot^2}{8\pi G},\ \
+M=\tfrac{4\pi}{3}\bar\rho_{m,0}R^3.\\
+&\sigma^2(M)=\int \frac{dk}{k}\frac{k^3P(k)}{2\pi^2}|W(kR)|^2,\quad
+D(a)\propto H(a)\int^a\frac{da'}{(a'H(a'))^3}.\\
+&\nu=\frac{\delta_c}{\sigma(M)D(z)},\quad 
+f_{\rm PS}(\nu)=\sqrt{\tfrac{2}{\pi}}\nu e^{-\nu^2/2},\quad
+\frac{dn}{dM}=\frac{\bar\rho_{m,0}}{M} f(\nu)\frac{d\nu}{dM}.\\
+&R_{\rm vir}\propto M^{1/3}\Delta_{\rm vir}^{-1/3}E(z)^{-1},\quad
+V_c\propto M^{1/3}\Delta_{\rm vir}^{1/6}E(z)^{1/3},\quad
+T_{\rm vir}\propto M^{2/3}\Delta_{\rm vir}^{1/3}(1+z).
+\end{aligned}
+\]
+
+\end{document}
