@@ -39,11 +39,7 @@ Alternatively, you can also just **open an Issue** if you spot a mistake but don
 ---
 
 ## 📚 References & Resources
-- Dodelson, *Modern Cosmology*  
-- Mo, van den Bosch & White, *Galaxy Formation and Evolution*  
-- Peacock, *Cosmological Physics*  
-- Schneider, *Extragalactic Astronomy and Cosmology*  
-- arXiv:astro-ph preprints on structure formation & Press–Schechter  
+
 
 ---
 
